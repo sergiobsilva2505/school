@@ -1,5 +1,8 @@
 package br.com.alura.school.user;
 
+import br.com.alura.school.enroll.Enroll;
+import org.apache.catalina.LifecycleState;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +11,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -26,6 +32,8 @@ class User {
     @Email
     @Column(nullable = false, unique = true)
     private String email;
+
+    //
 
     @Deprecated
     protected User() {}
