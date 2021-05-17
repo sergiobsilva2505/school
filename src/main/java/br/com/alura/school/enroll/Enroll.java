@@ -6,6 +6,7 @@ import br.com.alura.school.user.User;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -18,20 +19,22 @@ public class Enroll {
     private LocalDate enrollDate;
 
     @ManyToOne
-    @NotBlank
     private User user;
 
     @ManyToOne
-    @NotBlank
     private Course course;
 
     @Deprecated
     protected Enroll(){}
 
-    Enroll(LocalDate enrollDate, User user, Course course) {
-        this.enrollDate = enrollDate;
+    Enroll(User user, Course course) {
+        this.enrollDate = LocalDate.now();
         this.user = user;
         this.course = course;
+    }
+
+    Long getId() {
+        return id;
     }
 
     LocalDate getEnrollDate() {
@@ -44,5 +47,18 @@ public class Enroll {
 
     Course getCourse() {
         return course;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Enroll)) return false;
+        Enroll enroll = (Enroll) o;
+        return Objects.equals(getUser(), enroll.getUser()) && Objects.equals(getCourse(), enroll.getCourse());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUser(), getCourse());
     }
 }

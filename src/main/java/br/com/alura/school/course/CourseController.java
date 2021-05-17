@@ -28,7 +28,8 @@ class CourseController {
 
     @GetMapping("/courses/{code}")
     ResponseEntity<CourseResponse> courseByCode(@PathVariable("code") String code) {
-        Course course = courseRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("Course with code %s not found", code)));
+        Course course = courseRepository.findByCode(code).orElseThrow(() ->
+                new ResponseStatusException(NOT_FOUND, format("Course with code %s not found", code)));
         return ResponseEntity.ok(new CourseResponse(course));
     }
 

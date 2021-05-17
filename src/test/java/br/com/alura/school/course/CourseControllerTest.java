@@ -40,7 +40,7 @@ class CourseControllerTest {
                 .andExpect(jsonPath("$.shortDescription", is("Java and O...")));
     }
 
-    @Test //TODO teste falhamdo
+    @Test
     void should_retrieve_all_courses() throws Exception {
         courseRepository.save(new Course("spring-1", "Spring Basics", "Spring Core and Spring MVC."));
         courseRepository.save(new Course("spring-2", "Spring Boot", "Spring Boot"));
