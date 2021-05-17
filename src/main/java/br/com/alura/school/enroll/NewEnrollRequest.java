@@ -17,6 +17,10 @@ class NewEnrollRequest {
     public NewEnrollRequest() {
     }
 
+    public NewEnrollRequest(String userName) {
+        this.userName = userName;
+    }
+
     public String getUserName() {
         return userName;
     }

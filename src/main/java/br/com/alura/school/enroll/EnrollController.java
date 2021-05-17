@@ -5,14 +5,14 @@ import br.com.alura.school.course.CourseRepository;
 import br.com.alura.school.user.User;
 import br.com.alura.school.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;;
+import java.util.List;
+import java.util.Optional;;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -42,8 +42,9 @@ public class EnrollController {
         if (exist){
             throw new ResponseStatusException(BAD_REQUEST, format("User %s already enrolled in the course", obj.getUserName()));
         }
-        Enroll obj2= enrollRepository.save(enroll);
-        URI location = URI.create(format("/courses/enroll/%s", obj2.getId()));
+        Enroll newEnroll = enrollRepository.save(enroll);
+        URI location = URI.create(format("/courses/enroll/%s", newEnroll.getId()));
+
         return ResponseEntity.created(location).build();
     }
 
